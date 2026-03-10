@@ -418,6 +418,7 @@
             <div class="nav-item" data-page="calendar">透析日历</div>
             <div class="nav-item" data-page="vitals">生命体征</div>
             <div class="nav-item" data-page="medicine-record">用药记录</div>
+            <div class="nav-item" data-page="diet-taboo">🚫 饮食禁忌</div>
             <div class="nav-item admin-only" data-page="admin-panel" style="display: none;">管理员</div>
         </nav>
 
@@ -733,6 +734,207 @@
             <div class="medicine-record-list">
                 <h3 style="font-size: 18px; margin-bottom: 20px; color: var(--text-color);">历史记录</h3>
                 <div id="medicineRecordList"></div>
+            </div>
+        </div>
+
+        <!-- 饮食禁忌页面 -->
+        <div id="diet-tabooPage" class="page">
+            <h2 style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 24px;">🚫</span> 饮食禁忌
+            </h2>
+            
+            <!-- 核心原则 -->
+            <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 20px; border-radius: var(--radius-lg); margin-bottom: 25px; font-size: 15px; line-height: 1.6;">
+                <strong style="font-size: 16px;">⚠️ 核心原则</strong><br>
+                透析患者饮食需严守 <strong>"三控一限"</strong>：控钾、控磷、控钠、限液体。<br>
+                这直接关系到心脏安全、血管健康和透析效果。
+            </div>
+            
+            <!-- 一、绝对禁忌 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: #e74c3c; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e74c3c; display: flex; align-items: center; gap: 8px;">
+                    🚫 一、绝对禁忌（红灯区：禁止食用）
+                </h3>
+                
+                <!-- 水果类 -->
+                <div style="background: #fff5f5; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px; font-size: 16px;">🍎 水果类（高钾）</h4>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px;">
+                            <tr style="background: #e74c3c; color: white;">
+                                <th style="padding: 10px; text-align: left; border-radius: 4px 0 0 0;">水果</th>
+                                <th style="padding: 10px; text-align: left; border-radius: 0 4px 0 0;">风险说明</th>
+                            </tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>杨桃</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">⚠️ 含神经毒素，可致呃逆、呕吐、意识障碍，甚至<strong style="color:#e74c3c;">死亡</strong></td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>香蕉</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">钾含量极高（358mg/100g），易引发心律失常、心脏骤停</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>橙子/橘子/柚子</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">钾含量高（200-300mg/100g），鲜榨果汁钾浓度更高</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>猕猴桃/哈密瓜</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">钾含量250-300mg/100g，暗藏高钾风险</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>榴莲</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">高钾高磷（钾436mg/100g，磷34mg/100g）</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>椰子</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">椰子水钾含量高（250mg/100ml），椰肉磷含量高</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>鲜枣/果干/果脯</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">钾浓缩后超标（干枣可达500mg/100g）</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px;"><strong>牛油果</strong></td><td style="padding: 10px;">热带水果钾含量普遍超标</td></tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 蔬菜类 -->
+                <div style="background: #fff5f5; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px; font-size: 16px;">🥬 蔬菜类（高钾）</h4>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px;">
+                            <tr style="background: #e74c3c; color: white;">
+                                <th style="padding: 10px; text-align: left; border-radius: 4px 0 0 0;">蔬菜</th>
+                                <th style="padding: 10px; text-align: left; border-radius: 0 4px 0 0;">处理建议</th>
+                            </tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>菠菜/空心菜等深绿色叶菜</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">含钾极高，必须焯水3-5分钟</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>土豆/山药/芋头</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">需切小块焯水10分钟去钾50%以上，限量食用（≤100g）</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>菌菇类（香菇、木耳等）</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">高钾高磷，需严格限量或避免</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px;"><strong>海藻类（海带、紫菜）</strong></td><td style="padding: 10px;">钾磷双高，禁止食用</td></tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 其他高钾食物 -->
+                <div style="background: #fff5f5; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px; font-size: 16px;">⚠️ 其他高钾食物</h4>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 14px; line-height: 2;">
+                        <li><strong>浓肉汤/火锅汤：</strong>钾、磷、钠极高，只吃肉不喝汤</li>
+                        <li><strong>低钠盐/代盐：</strong>主要成分是氯化钾，对透析患者<span style="color: #e74c3c; font-weight: bold;">极危险！</span></li>
+                        <li><strong>豆类：</strong>红豆、绿豆、黑豆等干豆类</li>
+                    </ul>
+                </div>
+                
+                <!-- 高磷食物 -->
+                <div style="background: #fff8e6; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; border-left: 4px solid #f39c12;">
+                    <h4 style="color: #d68910; margin-bottom: 15px; font-size: 16px;">🧀 高磷食物</h4>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px;">
+                            <tr style="background: #f39c12; color: white;">
+                                <th style="padding: 10px; text-align: left; border-radius: 4px 0 0 0;">食物类别</th>
+                                <th style="padding: 10px; text-align: left; border-radius: 0 4px 0 0;">具体食物</th>
+                            </tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>加工肉制品</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">香肠、火腿、培根、午餐肉（含磷酸盐添加剂，吸收率90%）</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>动物内脏</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">肝、腰、脑、心</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>奶制品</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">奶粉、鲜奶、酸奶、奶酪（需严格限制分量）</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>坚果/种子</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">花生、核桃、瓜子、芝麻、杏仁</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>全谷类</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">糙米、全麦面包、燕麦、胚芽米</td></tr>
+                            <tr style="background: #fafafa;"><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>含磷饮料</strong></td><td style="padding: 10px; border-bottom: 1px solid #eee;">可乐等深色碳酸饮料（含磷酸）、啤酒</td></tr>
+                            <tr style="background: white;"><td style="padding: 10px;"><strong>蛋黄</strong></td><td style="padding: 10px;">磷含量高，每日不超过1个</td></tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 高钠食物 -->
+                <div style="background: #fff5f5; padding: 20px; border-radius: var(--radius); border-left: 4px solid #e74c3c;">
+                    <h4 style="color: #c0392b; margin-bottom: 15px; font-size: 16px;">🧂 高钠食物</h4>
+                    <p style="margin: 0; font-size: 14px; line-height: 2;">
+                        咸菜、酱菜、腊肉、火腿肠、方便面<br>
+                        酱油、蚝油、豆瓣酱、腐乳、鸡精
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 二、谨慎食用 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: #f39c12; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f39c12; display: flex; align-items: center; gap: 8px;">
+                    ⚠️ 二、谨慎食用（黄灯区：严格控量+正确处理）
+                </h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div style="background: #f0fff4; padding: 20px; border-radius: var(--radius); border-left: 4px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin-bottom: 12px; font-size: 15px;">🍎 可适量食用的水果（低钾）</h4>
+                        <p style="margin: 0; font-size: 14px; line-height: 1.8;">
+                            <strong>苹果/梨/桃子/葡萄：</strong>每日总量100-150g（约小半个苹果）<br>
+                            <strong>草莓/蓝莓：</strong>富含抗氧化物，可少量点缀<br>
+                            <strong>西瓜/木瓜/菠萝：</strong>水分大，需计入每日液体量
+                        </p>
+                    </div>
+                    <div style="background: #f0fff4; padding: 20px; border-radius: var(--radius); border-left: 4px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin-bottom: 12px; font-size: 15px;">🥬 可适量食用的蔬菜（低钾）</h4>
+                        <p style="margin: 0; font-size: 14px; line-height: 1.8;">
+                            冬瓜、黄瓜、丝瓜、卷心菜、白菜、萝卜、豆芽、洋葱<br>
+                            <strong>处理方法：</strong>建议先焯水1-2分钟，弃去菜汤
+                        </p>
+                    </div>
+                    <div style="background: #f0fff4; padding: 20px; border-radius: var(--radius); border-left: 4px solid #27ae60;">
+                        <h4 style="color: #27ae60; margin-bottom: 12px; font-size: 15px;">🥩 优质蛋白质（推荐）</h4>
+                        <p style="margin: 0; font-size: 14px; line-height: 1.8;">
+                            <strong>鸡蛋清：</strong>完美选择，磷含量极低<br>
+                            <strong>瘦肉/鱼肉/去皮鸡胸肉：</strong>每次50-75g（约1个鸡蛋大小）<br>
+                            <strong>豆腐/豆浆：</strong>适量食用（豆腐50-100g/日，豆浆200ml/日）
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三、实用去钾技巧 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: var(--primary-color); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-color); display: flex; align-items: center; gap: 8px;">
+                    💡 三、实用去钾技巧
+                </h3>
+                <div style="background: #e8f4fc; padding: 20px; border-radius: var(--radius); border-left: 4px solid var(--primary-color);">
+                    <ul style="margin: 0; padding-left: 25px; font-size: 14px; line-height: 2.2;">
+                        <li><strong>浸泡法：</strong>蔬菜切小块，清水浸泡30分钟以上，换水2-3次，可减少30%钾含量</li>
+                        <li><strong>焯水法：</strong>蔬菜放入沸水焯烫3-5分钟，弃去汤汁，可去除30%-50%的钾</li>
+                        <li><strong>水果处理：</strong>去皮去籽（果皮和果核处钾含量高），切块浸泡1-2小时</li>
+                        <li><strong>米饭处理：</strong>采用"捞饭"法，多加水煮饭，滤去米汤后再蒸</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 四、每日摄入量参考 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: #9b59b6; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #9b59b6; display: flex; align-items: center; gap: 8px;">
+                    📏 四、每日摄入量参考
+                </h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px;">
+                        <tr style="background: #9b59b6; color: white;">
+                            <th style="padding: 12px; text-align: left; border-radius: 4px 0 0 0;">指标</th>
+                            <th style="padding: 12px; text-align: left; border-radius: 0 4px 0 0;">建议量</th>
+                        </tr>
+                        <tr style="background: white;"><td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>液体总量</strong></td><td style="padding: 12px; border-bottom: 1px solid #eee;">前一日尿量+500ml（透析间期体重增长≤干体重5%）</td></tr>
+                        <tr style="background: #fafafa;"><td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>蛋白质</strong></td><td style="padding: 12px; border-bottom: 1px solid #eee;">血透患者1.0-1.2g/kg/日，腹透患者1.2-1.5g/kg/日</td></tr>
+                        <tr style="background: white;"><td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>钠</strong></td><td style="padding: 12px; border-bottom: 1px solid #eee;">每日≤3-5g盐（约1啤酒瓶盖）</td></tr>
+                        <tr style="background: #fafafa;"><td style="padding: 12px;"><strong>水果总量</strong></td><td style="padding: 12px;">每日100-200g（低钾品种）</td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 五、风险预警 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: #e74c3c; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e74c3c; display: flex; align-items: center; gap: 8px;">
+                    🚨 五、风险预警
+                </h3>
+                <div style="background: #ffe6e6; padding: 20px; border-radius: var(--radius); border-left: 4px solid #e74c3c;">
+                    <p style="margin: 0 0 12px 0; font-size: 14px; font-weight: bold;">出现以下症状需立即就医：</p>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 14px; line-height: 2;">
+                        <li><strong style="color: #e74c3c;">高钾血症：</strong>心慌、乏力、口唇麻木、肌肉震颤</li>
+                        <li><strong style="color: #e74c3c;">高磷血症：</strong>皮肤瘙痒、骨痛</li>
+                        <li><strong style="color: #e74c3c;">液体超负荷：</strong>体重每日增长＞1kg、下肢水肿</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 核心认知升级 -->
+            <div style="background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin-bottom: 25px;">
+                <h3 style="font-size: 18px; color: #2c3e50; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #2c3e50; display: flex; align-items: center; gap: 8px;">
+                    🧠 核心认知升级
+                </h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: var(--radius); font-size: 14px; line-height: 2.2;">
+                    <p style="margin: 0 0 12px 0;"><strong style="color: #e74c3c;">"隐形磷"最危险：</strong>加工食品中的磷酸盐添加剂吸收率高达90%，学会看配料表，看到"磷酸"字样就放下</p>
+                    <p style="margin: 0 0 12px 0;"><strong style="color: #e74c3c;">低钠盐是毒药：</strong>低钠盐=氯化钾，对透析患者致命</p>
+                    <p style="margin: 0 0 12px 0;"><strong style="color: #e74c3c;">透析不是万能的：</strong>饮食控制不当会让透析效果"白做"</p>
+                    <p style="margin: 0 0 12px 0;"><strong style="color: #e74c3c;">个体化调整：</strong>血透和腹透饮食有差异，需根据透析频率、并发症动态调整</p>
+                    <p style="margin: 0;"><strong style="color: #e74c3c;">定期监测是关键：</strong>每月检测血钾、血磷、血钙，根据指标优化饮食</p>
+                </div>
+            </div>
+            
+            <!-- 温馨提示 -->
+            <div style="background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; padding: 25px; border-radius: var(--radius-lg); text-align: center; font-size: 15px; line-height: 1.8;">
+                💡 <strong>建议将这份清单贴在冰箱上，买菜做饭前看一眼。</strong><br>
+                饮食控制不是"什么都不能吃"，而是"知道怎么吃"。<br>
+                <span style="font-size: 13px; opacity: 0.9;">如有任何疑问，务必及时咨询主治医生或临床营养师。</span>
             </div>
         </div>
 
