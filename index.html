@@ -3381,13 +3381,13 @@
                         }
                     }
                 }
+                // 今天是透析日但透析已结束
+                return '今天的透析已完成';
             }
 
             // 查找下一个透析日（按日期排序）
             const sortedDialysisDays = [...dialysisDays].sort((a, b) => {
-                const dateA = new Date(a);
-                const dateB = new Date(b);
-                return dateA - dateB;
+                return new Date(a) - new Date(b);
             });
 
             // 找到今天之后的下一个透析日
@@ -3399,46 +3399,54 @@
                 }
             }
 
-            // 如果没有找到，取下个月的第一个透析日（假设是循环的）
-            if (nextDialysisDate === null && sortedDialysisDays.length > 0) {
-                nextDialysisDate = sortedDialysisDays[0];
+            // 如果没有找到未来的透析日
+            if (nextDialysisDate === null) {
+                return '暂无后续透析计划';
             }
 
-            if (!nextDialysisDate) {
-                return '暂无透析计划';
-            }
-
-            // 计算距离下一个透析日的天数
-            const nextDate = new Date(nextDialysisDate);
-            const diffTime = nextDate - currentDate;
-            const daysUntil = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
+            // 计算距离下一个透析日的精确时间
+            const nextDate = new Date(nextDialysisDate + 'T00:00:00');
+            const now = new Date(currentDate);
+            
             // 获取透析时间
             const nextDialysisTime = user.dialysisTimes && user.dialysisTimes[nextDialysisDate];
-
+            let slotStartMinutes = 7 * 60 + 30; // 默认上午开始
+            
             if (nextDialysisTime && timeSlots[nextDialysisTime]) {
-                const slot = timeSlots[nextDialysisTime];
-                // 计算总分钟数
-                const totalMinutesUntil = daysUntil * 24 * 60 - currentMinutes + slot.start;
-                const days = Math.floor(totalMinutesUntil / (24 * 60));
-                const hours = Math.floor((totalMinutesUntil % (24 * 60)) / 60);
-
-                if (days > 0 && hours > 0) {
-                    return `距下一次透析还有 ${days} 天 ${hours} 小时`;
-                } else if (days > 0) {
-                    return `距下一次透析还有 ${days} 天`;
-                } else if (hours > 0) {
-                    return `距下一次透析还有 ${hours} 小时`;
-                } else {
-                    return '透析即将开始';
-                }
+                slotStartMinutes = timeSlots[nextDialysisTime].start;
             }
 
-            // 没有设置具体时间，只显示天数
-            if (daysUntil === 0) {
-                return '今天是透析日';
+            // 计算精确的毫秒差
+            const targetTime = new Date(nextDialysisDate + 'T00:00:00');
+            targetTime.setHours(Math.floor(slotStartMinutes / 60), slotStartMinutes % 60, 0, 0);
+            
+            const diffMs = targetTime - now;
+            
+            if (diffMs <= 0) {
+                return '透析即将开始';
+            }
+
+            // 计算天、小时、分钟
+            const totalMinutes = Math.floor(diffMs / (1000 * 60));
+            const days = Math.floor(totalMinutes / (24 * 60));
+            const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+            const minutes = totalMinutes % 60;
+
+            // 格式化输出
+            if (days > 0) {
+                if (hours > 0) {
+                    return `距下一次透析还有 ${days} 天 ${hours} 小时`;
+                } else {
+                    return `距下一次透析还有 ${days} 天`;
+                }
+            } else if (hours > 0) {
+                if (minutes > 0) {
+                    return `距下一次透析还有 ${hours} 小时 ${minutes} 分钟`;
+                } else {
+                    return `距下一次透析还有 ${hours} 小时`;
+                }
             } else {
-                return `距下一次透析还有 ${daysUntil} 天`;
+                return `距下一次透析还有 ${minutes} 分钟`;
             }
         }
 
