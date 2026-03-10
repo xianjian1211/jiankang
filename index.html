@@ -2715,8 +2715,12 @@
             // 更新今日最大摄入显示
             updateMaxWaterIntakeDisplay();
             
-            alert('✅ 个人信息保存成功！');
-            closeProfileModal();
+            // 先关闭弹窗
+            document.getElementById('profileModal').style.display = 'none';
+            // 再显示成功提示
+            setTimeout(function() {
+                alert('✅ 个人信息保存成功！');
+            }, 100);
         }
 
         // 更新透析提醒
