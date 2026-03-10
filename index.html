@@ -2684,43 +2684,49 @@
 
         // 保存个人信息
         function saveProfileInfo() {
-            const user = getCurrentUser();
-            if (!user) return;
+            try {
+                const user = getCurrentUser();
+                if (!user) return;
 
-            user.name = document.getElementById('profileName').value || '用户';
-            user.age = document.getElementById('profileAge').value;
-            user.gender = document.getElementById('profileGender').value;
-            user.phone = document.getElementById('profilePhone').value;
-            user.dryWeight = document.getElementById('profileDryWeight').value;
-            user.urineVolume = document.getElementById('profileUrineVolume').value;
-            user.bedNumber = document.getElementById('profileBedNumber').value;
-            
-            // 如果填写了密码，则更新密码
-            const newPassword = document.getElementById('profilePassword').value;
-            if (newPassword) {
-                user.password = newPassword;
+                user.name = document.getElementById('profileName').value || '用户';
+                user.age = document.getElementById('profileAge').value;
+                user.gender = document.getElementById('profileGender').value;
+                user.phone = document.getElementById('profilePhone').value;
+                user.dryWeight = document.getElementById('profileDryWeight').value;
+                user.urineVolume = document.getElementById('profileUrineVolume').value;
+                user.bedNumber = document.getElementById('profileBedNumber').value;
+                
+                // 如果填写了密码，则更新密码
+                const newPassword = document.getElementById('profilePassword').value;
+                if (newPassword) {
+                    user.password = newPassword;
+                }
+
+                // 立即保存数据
+                saveDataToLocalStorage();
+            } catch (e) {
+                console.error('保存数据出错:', e);
             }
 
-            // 立即保存数据
-            saveDataToLocalStorage();
-
-            // 更新首页显示
-            const now = new Date();
-            const dialysisCountdown = calculateNextDialysisCountdown(now, user.dialysisDays || []);
-            document.getElementById('welcomeText').textContent = `${user.name}，你好！${dialysisCountdown}`;
+            // 更新首页显示（独立try-catch，不影响弹窗关闭）
+            try {
+                const now = new Date();
+                const user = getCurrentUser();
+                const dialysisCountdown = calculateNextDialysisCountdown(now, user.dialysisDays || []);
+                document.getElementById('welcomeText').textContent = `${user.name}，你好！${dialysisCountdown}`;
+                
+                // 更新首页核心数据显示
+                updateHomeCoreData();
+                
+                // 更新今日最大摄入显示
+                updateMaxWaterIntakeDisplay();
+            } catch (e) {
+                console.error('更新首页显示出错:', e);
+            }
             
-            // 更新首页核心数据显示
-            updateHomeCoreData();
-            
-            // 更新今日最大摄入显示
-            updateMaxWaterIntakeDisplay();
-            
-            // 先关闭弹窗
+            // 关闭弹窗
             document.getElementById('profileModal').style.display = 'none';
-            // 再显示成功提示
-            setTimeout(function() {
-                alert('✅ 个人信息保存成功！');
-            }, 100);
+            alert('✅ 个人信息保存成功！');
         }
 
         // 更新透析提醒
