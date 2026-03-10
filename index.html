@@ -1296,7 +1296,7 @@
                         <label>密码</label>
                         <input type="password" id="profilePassword" placeholder="留空表示不修改密码">
                     </div>
-                    <button type="button" class="btn" id="saveProfileBtn" style="margin-top: 10px;">保存信息</button>
+                    <button type="button" class="btn" id="saveProfileBtn" onclick="saveProfileInfo()" style="margin-top: 10px;">保存信息</button>
                 </form>
             </div>
 
@@ -6622,12 +6622,7 @@
                     if (e.target === this) closeProfileModal();
                 };
                 
-                // 绑定个人中心保存按钮事件
-                document.getElementById('saveProfileBtn').onclick = function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    saveProfileInfo();
-                };
+                // 个人中心保存按钮事件已在 HTML 中绑定 onclick="saveProfileInfo()"
                 
                 // 绑定透析时间弹窗关闭按钮事件
                 document.getElementById('closeModal').onclick = closeDialysisModal;
